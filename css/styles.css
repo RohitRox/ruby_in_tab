@@ -1,0 +1,10 @@
+.container {
+padding: 44px 0 0;
+}
+.container textarea{
+  width: 90%;
+  height: 20em;
+  padding: 1em;
+  display: block;
+  margin: 0 auto;
+}

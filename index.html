@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RUBY IN TAB</title>
+
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link type="text/css" rel="stylesheet" media="screen" href="css/sidetap.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="css/default.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="sidetap">
+      <div class="stp-nav">
+        <div>
+          <nav>
+            <a href="#" class="selected">Home</a>
+            <a href="#">Help</a>
+            <a href="#">History</a>
+            <a href="#">Fav</a>
+            <a href="#">About</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="stp-content" id="content">
+        <header class="stp-fake-header">&nbsp;</header>
+        <div class="stp-overlay nav-toggle">&nbsp;</div>
+
+        <!-- Content Divs Look Like This -->
+        <div class="stp-content-panel">
+          <header>
+            <a href="javascript:void(0)" class="header-button icon menu"><span>Menu</span></a>
+            <a href="javascript:void(0)" class="header-button icon info right"><span>Run</span></a>
+            <h1>Ruby In Tab</h1>
+          </header>
+          <div class="stp-content-frame">
+            <div class="stp-content-body">
+              <div class="container">
+                <textarea placeholder="Your ruby code here"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End content Div -->
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/sidetap.js"></script>
+    <script type="text/javascript" src="js/lib/opal.js"></script>
+    <script type="text/javascript" src="js/lib/opal_parser.js"></script>
+    <script type="text/javascript" src="js/lib/opal_jquery.js"></script>
+    <script>
+      var st = sidetap();
+      $(".header-button.menu").on("click",st.toggle_nav)
+    </script>
+  </body>
+</html>
