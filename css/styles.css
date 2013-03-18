@@ -1,10 +1,43 @@
 .container {
-padding: 44px 0 0;
+padding: 64px 0 0;
+height: 100%;
 }
 .container textarea{
-  width: 90%;
-  height: 20em;
+  width: 94%;
+  height: 60%;
   padding: 1em;
   display: block;
   margin: 0 auto;
+}
+#output{
+  width: 94%;
+  background: #222;
+  padding: 1em;
+  margin: 1em auto;
+  box-shadow: 1px 1px 1px #555,inset 1px 1px 1px #000;
+}
+.big_btn{
+  display: block;
+  width: 40%;
+  margin: 30px auto;
+  padding: 10px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #5bb75b;
+  border-color: #51a351 #51a351 #387038;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.big_btn:hover,
+.big_btn:focus,
+.big_btn:active{
+  color: #ffffff;
+  background-color: #51a351;
+}
+
+.big_btn:active{
+  background-color: #408140;
 }
