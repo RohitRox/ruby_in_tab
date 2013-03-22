@@ -29,10 +29,10 @@
         <div class="stp-overlay nav-toggle">&nbsp;</div>
 
         <!-- Content Divs Look Like This -->
-        <div class="stp-content-panel">
+        <div class="stp-content-panel" id="home">
           <header>
             <a href="javascript:void(0)" class="header-button icon menu"><span>Menu</span></a>
-            <a href="javascript:void(0)" class="header-button icon info right run_me" id="run"><span>Run</span></a>
+            <a href="javascript:void(0)" class="header-button icon info right" id="action_about"><span>Run</span></a>
             <h1>Ruby In Tab</h1>
           </header>
           <div class="stp-content-frame">
@@ -46,6 +46,25 @@
           </div>
         </div>
         <!-- End content Div -->
+
+
+        <!-- Content Divs Look Like This -->
+        <div class="stp-content-panel hidden" id="about">
+         <header>
+            <a href="javascript:void(0)" class="header-button cancel right">Done</a>
+            <h1>What's This?</h1>
+          </header>
+          <div class="stp-content-frame">
+            <div class="stp-content-body">
+              <div class="container">
+                some about
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End content Div -->
+
+
       </div>
     </div>
     
@@ -56,10 +75,23 @@
     <script type="text/javascript" src="js/lib/opal_jquery.js"></script>
     <script>
       var st = sidetap();
+      var about = $('#about');
+      var home = $('#home');
       $(".header-button.menu").on("click",st.toggle_nav);
+      $('#action_about').click(function() {
+        return st.show_section(about, {
+          animation: 'upfrombottom'
+        });
+      });
+
+      $('a.cancel').click(function() {
+        return st.show_section(home, {
+          animation: 'downfromtop'
+        });
+      });
 
       var RIT = {
-        compile: function(){
+        compile: function(code){
           var old_puts = Opal.puts,
           flush = [];
           Opal.puts = function (e) {
@@ -86,7 +118,7 @@
         }
         else
         {
-          
+          RIT.compile(code);
         }
       });
     </script>
