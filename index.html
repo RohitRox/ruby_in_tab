@@ -418,6 +418,16 @@
           RIT.compile(code);
         }
       });
+      $(function(){
+        $('pre code').after('<div class="code_run_block"><a href="#" class="fav_this">Fav this</a><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
+        $('.run_or_edit_this').live('click', function(){
+          var code = $(this).parent('div').siblings('code').text();
+          st.show_section(home, {
+            animation: 'downfromtop'
+          });
+          $('#editor').val(code);
+        });
+      });
     </script>
   </body>
 </html>

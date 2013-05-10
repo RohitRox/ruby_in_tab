@@ -66,3 +66,16 @@ table{
 table tr, table td{
   text-align: left;
 }
+.code_run_block{
+  float: right;
+}
+.code_run_block a{
+  margin: 0 4px;
+  background: #CCC;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.code_run_block a:hover,.code_run_block a:active{
+  background: #BDBDBD;
+}
