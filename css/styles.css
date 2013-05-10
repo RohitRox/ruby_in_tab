@@ -1,5 +1,5 @@
 .container {
-padding: 64px 0 0;
+padding: 64px 10px 10px;
 height: 100%;
 }
 .container textarea{
@@ -37,7 +37,32 @@ height: 100%;
   color: #ffffff;
   background-color: #51a351;
 }
-
 .big_btn:active{
   background-color: #408140;
+}
+pre{
+  background: #ccc;
+  color: #333;
+  text-shadow: none;
+  padding: 1em;
+  border-radius: 2px;
+  margin: 6px;
+}
+.ruby_home h2{
+  margin: 10px 0;
+}
+.ruby_home p{
+  line-height: 1.2em;
+  font-weight: 200;
+}
+.about_rubyintab{
+  font-size: 1.8em;
+  font-family: arial;
+  line-height: 1.6em;
+}
+table{
+  width: 100%;
+}
+table tr, table td{
+  text-align: left;
 }

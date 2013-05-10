@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" media="screen" href="css/sidetap.css" />
     <link type="text/css" rel="stylesheet" media="screen" href="css/default.css" />
     <link type="text/css" rel="stylesheet" media="screen" href="css/styles.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="css/rainbow.css" />
   </head>
   <body>
     <div class="sidetap">
@@ -16,10 +17,10 @@
         <div>
           <nav>
             <a href="#" class="selected">Home</a>
-            <a href="#">Help</a>
-            <a href="#">History</a>
-            <a href="#">Fav</a>
-            <a href="#">About</a>
+            <a href="#" id="link_to_ruby_home">RubyQuickTips</a>
+            <a href="#" id="link_to_history">History</a>
+            <a href="#" id="link_to_fav">Fav</a>
+            <a href="#" id="link_to_about">About</a>
           </nav>
         </div>
       </div>
@@ -51,13 +52,284 @@
         <!-- Content Divs Look Like This -->
         <div class="stp-content-panel hidden" id="about">
          <header>
-            <a href="javascript:void(0)" class="header-button cancel right">Done</a>
+            <a href="javascript:void(0)" class="header-button cancel right">Back</a>
             <h1>What's This?</h1>
           </header>
           <div class="stp-content-frame">
             <div class="stp-content-body">
+              <div class="container about_rubyintab">
+                RubyInTab is an app that enables you to play with ruby in your android devices.<br />
+                Ruby quick tip section contains tips, tricks and snippets that you may or may noe be familiar with.<br />
+                The app was developed as a personal project that would help me to try out ruby in my android devise and collect ruby tricks and snippets that may be tried and learned on the go.
+                <br />
+                Thank You for using this app.
+                <br />
+                Would love to hear comments and feedback
+                <br />
+                <a href="http:twitter.com/roxxypoxxy">@roxxypoxxy</a>
+                <br />
+                Share the joy: <br />
+                <a href="#">Share with FB friends</a>
+                <a href="#">Tweet about RubyIntab</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End content Div -->
+
+         <!-- Content Divs Look Like This -->
+        <div class="stp-content-panel hidden" id="history">
+         <header>
+            <a href="javascript:void(0)" class="header-button cancel right">Back</a>
+            <h1>History</h1>
+          </header>
+          <div class="stp-content-frame">
+            <div class="stp-content-body">
               <div class="container">
-                some about
+                History of snippets .. 
+                <br/>
+                Comming Soon .. 
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End content Div -->
+
+         <!-- Content Divs Look Like This -->
+        <div class="stp-content-panel hidden" id="fav">
+         <header>
+            <a href="javascript:void(0)" class="header-button cancel right">Back</a>
+            <h1>Favourites</h1>
+          </header>
+          <div class="stp-content-frame">
+            <div class="stp-content-body">
+              <div class="container">
+                Favourite snippets ..
+                <br />
+                Comming Soon ..
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End content Div -->
+
+        <!-- Content Divs Look Like This -->
+        <div class="stp-content-panel hidden" id="ruby_home">
+         <header>
+            <a href="javascript:void(0)" class="header-button cancel right">Back</a>
+             <h1>RubyQuickTips</h1>
+          </header>
+          <div class="stp-content-frame">
+            <div class="stp-content-body">
+              <div class="container ruby_home">
+                <p>
+                  This guide is not a beginner guide as we directly discuss OOP with ruby, and move into advance features and tricks using ruby classes, modules, procs and blocks. This guide assumes that reader has basic knowledge of basics of  ruby like ruby basic variables, constants, data types, operators, control structures, methods and operators.
+                  <br />
+                  For beginners, I highly recommend <a href="">Ruby</a> app which is freely available at google playstore.
+                </p>
+                <h1>Ruby :: Diving into Classes</h1>
+                <p>Lets start with Ruby classes. Defining a class lets you group behaviors (methods) into convenient bundles, so that you can quickly create many objects that behave essentially the same way. Let's define a full blown ruby class:</p>
+                <br />
+                <pre>
+                  <code data-language="ruby">
+                class Person
+                  # initialize method is called when every new object is created
+                  def initialize(first, last)
+                    @first = first
+                    @last  = last
+                  end
+                  def full_name
+                    [@first,@last].compact.join(',')
+                  end
+                end
+                person1 = Person.new('Ian','Wimbley')
+                puts person1.full_name
+                  </code>
+                </pre>
+                <p>
+                  In the above example we have defined a ruby class Person with instance variables @first and @last and instance method full_name and we created an object of Person using Person.new.<br />
+                  Information and data associated with a particular object embodies the state of the object. Ruby objects come with their own storage and retrieval mechanism for values: instance variables and are represented by @ before the variable name.The instance variable enables individual objects to remember state.
+                  Instance variables work much like other variables: you assign values to them, and you read those values back; you can add them together, print them out, and so on. But instance variables have a few differences:
+                 <ul>
+                  <li>Instance variable names always start with @ (the at sign). This enables you to rec- ognize an instance variable at a glance.</li>
+                  <li>Instance variables are only visible to the object to which they belong.</li>
+                 </ul>
+              </p>
+              <h2>Getter and Setters</h2>
+              <p>
+                Ruby provides a built-in short-cuts that automatically creates a method that reads and returns the value of the instance variable with the same name as the method (give or take an @). It works like this:</p><br />
+                <pre>
+                    <code data-language="ruby">
+                  class Person 
+                    attr_reader :name, :age, :gender
+                  end
+                  </code>
+                </pre>
+                <p>The elements that start with colons (:name, and so on) are symbols. Symbols are a kind of naming or labeling facility. They’re a cousin of strings, although not quite the same thing.
+              </p><br />
+              <pre>
+                  <code data-language="ruby">
+                class Person
+
+                  attr_reader :status
+                  attr_writer :person_id
+                  attr_accessor :contact
+
+                  # initialize method is called when every new object is created
+                  def initialize(first, last)
+                    @first = first
+                    @last  = last
+                    @status = ''
+                  end
+                  def full_name
+                    [@first,@last].compact.join(',')
+                  end
+                end
+                person1 = Person.new('Ian','Wimbley')
+                puts person1.full_name
+                person1.contact = 9849942644
+                person1.person_id = 1
+                puts person1.contact
+                puts person1.status
+                puts person1.id # gives error
+                  </code>
+                </pre>
+                <p>Summary of attr_* methods:</p>
+                  <br />
+                  <table>
+                    <thead>
+                      <tr><th>Method name</th><th>Effect</th><th>Example</th><th>Equivalent code</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>attr_reader</td>
+                        <td>Creates a reader method</td>
+                        <td>attr_reader :venue</td>
+                        <td>
+                          <pre>
+                            def venue @venue
+                            end
+                          </pre>
+                        </td>
+                      </tr>
+                    <tr>
+                      <td>attr_writer</td>
+                      <td>Creates a writer method</td>
+                      <td>attr_writer :price</td>
+                      <td>
+                        <pre>
+                          def price=(price) 
+                            @price = price
+                          end
+                        </pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>attr_accessor</td>
+                      <td>Creates reader and writer meth- ods</td>
+                      <td>attr_accessor :price</td>
+                      <td>
+                        <pre>
+                          def price=(price) 
+                            @price = price
+                          end
+                          def price 
+                            @price
+                          end
+                        </pre>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                <h2>Inheritance</h2>
+                <p>
+                  Inheritance is a kind of downward chaining relationship between two classes (the super- class and the subclass), whereby one class “inherits” from another and the instances of the subclass acquire the behaviors—the methods—defined in the superclass.
+                </p>
+                <p>
+                  In this example, Magazine inherits from Publication. Note the syntax in
+                  Magazine’s class definition.
+                </p><br />
+                <pre>
+                    <code data-language="ruby">
+                  class Publication 
+                    attr_accessor :publisher
+                  end
+                  class Magazine &lt; Publication 
+                    attr_accessor :editor
+                  end
+                  mag = Magazine.new 
+                  mag.publisher = "David A. Black" 
+                  mag.editor = "Joe Smith"
+                  puts "Mag is published by #{mag.publisher}, and edited by #{mag.editor}."
+                  </code>
+                </pre>
+                <p>
+                  The symbol &lt; designates Magazine as a subclass of Publication. Because every publi- cation object has publisher and publisher= methods (thanks to attr_accessor :publisher), every magazine object has those methods too. In addition, magazine objects have editor and editor= methods:
+                </p>
+                <h2>Single inheritance</h2>
+                <p>
+                  In some object-oriented languages, it’s possible for a given class to inherit from more than one class. You might, for example, have a Teacher class that inherits from a Person class and also inherits from an Employee class.Ruby doesn’t allow multiple inheritance; every Ruby class can have only one superclass, in keeping with the principle of single inheritance.
+                  <br />
+                  Despite what might be your first impression, Ruby’s single inheritance doesn’t restrict you: Ruby provides <i>modules</i>, which are bundles of programming functionality similar to classes (except that they don’t have instances), that you can easily graft onto your class’s family tree to provide as many methods for your objects as you need.(we will focus on modules later on)
+                </p>
+                <h2>Singleton methods</h2>
+                <p>
+                  Singleton methods, alao called as class methods serve a purpose, defining a method that we can invoke without creating new object of the class. Let's see following example:</p><br />
+                  <pre>
+                      <code data-language="ruby">
+                    class Temperature
+                      # note the method definition style
+                      def Temperature.c2f(f)
+                        f*9.0/5+32 
+                      end
+                      def Temperature.f2c(c) 
+                        (c-32)*5/9.0
+                      end 
+                    end
+                    puts Temperature.c2f(100)
+                    </code>
+                  </pre>
+                  <p>By defining Temperature.c2f, we’ve defined a method that we can access through the class object Temperature but not through its instances. One more singleton example.</p><br />
+                  <pre>
+                    <code data-language="ruby">
+                    class Person
+                      attr_accessor :name, :age
+                      def initialize(name, age)
+                        @name = name
+                        @age = age
+                      end
+                      def Person.average_age(*persons)
+                         total_age = 0
+                         persons.each do |person|
+                            total_age += person.age
+                        end
+                         puts "The average age of people are #{total_age/persons.size}"
+                      end
+                    end
+
+                    p = Person.new('Mob', 23)
+                    q = Person.new('Travis', 24)
+                    r = Person.new('Lama', 21)
+                    Person.average_age(p,q,r)
+                    </code>
+                  </pre>  
+                <h2>Re-Opening the Class</h2>
+                <p> You can re-open any classes , redefine methods and add new methods.<br />Example:</p><br />
+                <pre>
+                    <code data-language="ruby">
+                  str  = 'http://www.ruby-lang.org/en/'
+
+                  # reopen string class and add method for checking if string is a link
+                  
+                  class String
+                    def is_link?
+                     (/http|https/).match('http') ? true : false
+                    end
+                  end
+                  puts str.is_link?
+                  </code>
+                </pre>
+                <h2>More Comming Soon ..</h2>
               </div>
             </div>
           </div>
@@ -73,12 +345,19 @@
     <script type="text/javascript" src="js/lib/opal.js"></script>
     <script type="text/javascript" src="js/lib/opal_parser.js"></script>
     <script type="text/javascript" src="js/lib/opal_jquery.js"></script>
+    <script type="text/javascript" src="js/lib/rainbow.js"></script>
+    <script type="text/javascript" src="js/lib/rainbow.ruby.js"></script>
     <script>
       var st = sidetap();
+
       var about = $('#about');
       var home = $('#home');
+      var ruby_home = $('#ruby_home');
+      var history = $('#history');
+      var fav = $('#fav')
+
       $(".header-button.menu").on("click",st.toggle_nav);
-      $('#action_about').click(function() {
+      $('#action_about, #link_to_about').click(function() {
         return st.show_section(about, {
           animation: 'upfrombottom'
         });
@@ -87,6 +366,24 @@
       $('a.cancel').click(function() {
         return st.show_section(home, {
           animation: 'downfromtop'
+        });
+      });
+
+      $('#link_to_ruby_home').click(function(){
+        return st.show_section(ruby_home, {
+          animation: 'rightfromleft'
+        });
+      });
+
+      $('#link_to_history').click(function(){
+        return st.show_section(history, {
+          animation: 'rightfromleft'
+        });
+      });
+
+      $('#link_to_fav').click(function(){
+        return st.show_section(fav, {
+          animation: 'rightfromleft'
         });
       });
 
