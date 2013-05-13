@@ -58,19 +58,19 @@
           <div class="stp-content-frame">
             <div class="stp-content-body">
               <div class="container about_rubyintab">
-                RubyInTab is an app that enables you to play with ruby in your android devices.<br />
-                Ruby quick tip section contains tips, tricks and snippets that you may or may noe be familiar with.<br />
+                RubyInTab is an app that enables you to play with ruby in your android device.<br />
+                Ruby quick tip section contains tips, tricks and snippets that you may or may not be familiar with.<br />
                 The app was developed as a personal project that would help me to try out ruby in my android devise and collect ruby tricks and snippets that may be tried and learned on the go.
-                <br />
+                <br /><br />
                 Thank You for using this app.
                 <br />
-                Would love to hear comments and feedback
-                <br />
-                <a href="http:twitter.com/roxxypoxxy">@roxxypoxxy</a>
-                <br />
+                Would love to hear comments and feedback.
+                <br /><br />
+                <a href="http:twitter.com/roxxypoxxy" class="button_class">@roxxypoxxy</a>
+                <br /><br />
                 Share the joy: <br />
-                <a href="#">Share with FB friends</a>
-                <a href="#">Tweet about RubyIntab</a>
+                <a href="#" class="button_class">Share with FB friends</a>
+                <a href="#" class="button_class">Tweet about RubyIntab</a>
               </div>
             </div>
           </div>
@@ -86,9 +86,9 @@
           <div class="stp-content-frame">
             <div class="stp-content-body">
               <div class="container">
-                History of snippets .. 
+                History of snippets ..
                 <br/>
-                Comming Soon .. 
+                Comming Soon ..
               </div>
             </div>
           </div>
@@ -160,7 +160,7 @@
                 Ruby provides a built-in short-cuts that automatically creates a method that reads and returns the value of the instance variable with the same name as the method (give or take an @). It works like this:</p><br />
                 <pre>
                     <code data-language="ruby">
-                  class Person 
+                  class Person
                     attr_reader :name, :age, :gender
                   end
                   </code>
@@ -218,7 +218,7 @@
                       <td>attr_writer :price</td>
                       <td>
                         <pre>
-                          def price=(price) 
+                          def price=(price)
                             @price = price
                           end
                         </pre>
@@ -230,10 +230,10 @@
                       <td>attr_accessor :price</td>
                       <td>
                         <pre>
-                          def price=(price) 
+                          def price=(price)
                             @price = price
                           end
-                          def price 
+                          def price
                             @price
                           end
                         </pre>
@@ -251,14 +251,14 @@
                 </p><br />
                 <pre>
                     <code data-language="ruby">
-                  class Publication 
+                  class Publication
                     attr_accessor :publisher
                   end
-                  class Magazine &lt; Publication 
+                  class Magazine &lt; Publication
                     attr_accessor :editor
                   end
-                  mag = Magazine.new 
-                  mag.publisher = "David A. Black" 
+                  mag = Magazine.new
+                  mag.publisher = "David A. Black"
                   mag.editor = "Joe Smith"
                   puts "Mag is published by #{mag.publisher}, and edited by #{mag.editor}."
                   </code>
@@ -280,11 +280,11 @@
                     class Temperature
                       # note the method definition style
                       def Temperature.c2f(f)
-                        f*9.0/5+32 
+                        f*9.0/5+32
                       end
-                      def Temperature.f2c(c) 
+                      def Temperature.f2c(c)
                         (c-32)*5/9.0
-                      end 
+                      end
                     end
                     puts Temperature.c2f(100)
                     </code>
@@ -312,7 +312,7 @@
                     r = Person.new('Lama', 21)
                     Person.average_age(p,q,r)
                     </code>
-                  </pre>  
+                  </pre>
                 <h2>Re-Opening the Class</h2>
                 <p> You can re-open any classes , redefine methods and add new methods.<br />Example:</p><br />
                 <pre>
@@ -320,7 +320,7 @@
                   str  = 'http://www.ruby-lang.org/en/'
 
                   # reopen string class and add method for checking if string is a link
-                  
+
                   class String
                     def is_link?
                      (/http|https/).match('http') ? true : false
@@ -342,7 +342,7 @@
                       def self.title
                         true
                       end
-                     
+
                       def title
                         true
                       end
@@ -362,10 +362,10 @@
                       module DataVisualizer
                           class Grapher
                           end
-                       
+
                           class Plotter
                           end
-                       
+
                           def self.data_compatible?
                             puts "yes it works"
                           end
@@ -376,7 +376,7 @@
                       #       puts "yes it works ok"
                       #     end
                       # end
-                      #To access methods that modules 
+                      #To access methods that modules
                       DataVisualizer.data_compatible?
                       #To access classes defined by modules
                       DataVisualizer::Grapher.new
@@ -443,13 +443,13 @@
                         def self.included(base)
                           base.extend(ClassMethods)
                         end
-                        
+
                         module ClassMethods
                           def bar
                             puts 'class method'
                           end
                         end
-                        
+
                         def foo
                           puts 'instance method'
                         end
@@ -475,7 +475,7 @@
                       arr.each{ |animal| puts animal }
                     </code>
                   </pre>
-                    
+
                   </p>
                 <h2>More Comming Soon ..</h2>
               </div>
@@ -487,7 +487,7 @@
 
       </div>
     </div>
-    
+
     <script type="text/javascript" src="js/lib/jquery.js"></script>
     <script type="text/javascript" src="js/lib/sidetap.js"></script>
     <script type="text/javascript" src="js/lib/opal.js"></script>

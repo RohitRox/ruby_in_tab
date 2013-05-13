@@ -1,25 +1,25 @@
 // lib/opal-jquery/document.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice, __module = __opal.module;
-  
+
   return (function(__base){
     function Document() {};
     Document = __module(__base, "Document", Document);
     var Document_prototype = Document.prototype, __scope = Document._scope, TMP_1;
 
     Document['$[]'] = function(selector) {
-      
+
       return $(selector);
     };
 
     Document.$find = function(selector) {
-      
+
       return this['$[]'](selector)
     };
 
     Document.$id = function(id) {
-      
-      
+
+
       var el = document.getElementById(id);
 
       if (!el) {
@@ -27,19 +27,19 @@
       }
 
       return $(el);
-    
+
     };
 
     Document.$parse = function(str) {
-      
+
       return $(str);
     };
 
     Document['$ready?'] = TMP_1 = function() {
       var __context, block;
       block = TMP_1._p || nil, __context = block._s, TMP_1._p = null;
-      
-      
+
+
       if (block === nil) {
         return nil;
       }
@@ -49,16 +49,16 @@
       });
 
       return nil;
-    
+
     };
 
     Document.$title = function() {
-      
+
       return document.title;
     };
 
     Document['$title='] = function(title) {
-      
+
       return document.title = title;
     };
         ;Document._sdonate(["$[]", "$find", "$id", "$parse", "$ready?", "$title", "$title="]);
@@ -67,19 +67,19 @@
 // lib/opal-jquery/element.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice, __klass = __opal.klass;
-  
+
   return (function(__base, __super){
     function Element() {};
     Element = __klass(__base, __super, "Element", Element);
     var Element_prototype = Element.prototype, __scope = Element._scope, TMP_1, TMP_2;
 
     Element.$find = function(selector) {
-      
+
       return $(selector);
     };
 
     Element.$id = function(id) {
-      
+
       return __scope.Document.$id(id)
     };
 
@@ -91,12 +91,12 @@
     };
 
     Element.$parse = function(str) {
-      
+
       return $(str);
     };
 
     Element_prototype['$[]'] = function(name) {
-      
+
       return this.attr(name) || "";
     };
 
@@ -113,18 +113,18 @@
     Element_prototype.$append_to = Element_prototype.appendTo;
 
     Element_prototype.$append_to_body = function() {
-      
+
       return this.appendTo(document.body);
     };
 
     Element_prototype.$append_to_head = function() {
-      
+
       return this.appendTo(document.head);
     };
 
     Element_prototype.$at = function(index) {
-      
-      
+
+
       var length = this.length;
 
       if (index < 0) {
@@ -136,7 +136,7 @@
       }
 
       return $(this[index]);
-    
+
     };
 
     Element_prototype.$before = Element_prototype.before;
@@ -144,8 +144,8 @@
     Element_prototype.$children = Element_prototype.children;
 
     Element_prototype.$class_name = function() {
-      
-      
+
+
       var first = this[0];
 
       if (!first) {
@@ -153,16 +153,16 @@
       }
 
       return first.className || "";
-    
+
     };
 
     Element_prototype['$class_name='] = function(name) {
-      
-      
+
+
       for (var i = 0, length = this.length; i < length; i++) {
         this[i].className = name;
       }
-    
+
       return this;
     };
 
@@ -171,7 +171,7 @@
     Element_prototype.$each = TMP_1 = function() {
       var __context, __yield;
       __yield = TMP_1._p || nil, __context = __yield._s, TMP_1._p = null;
-      
+
       for (var i = 0, length = this.length; i < length; i++) {
       if (__yield.call(__context, $(this[i])) === __breaker) return __breaker.$v;
       };
@@ -181,7 +181,7 @@
     Element_prototype.$find = Element_prototype.find;
 
     Element_prototype.$first = function() {
-      
+
       return this.length ? this.first() : nil;
     };
 
@@ -190,15 +190,15 @@
     Element_prototype['$has_class?'] = Element_prototype.hasClass;
 
     Element_prototype.$html = function() {
-      
+
       return this.html() || "";
     };
 
     Element_prototype['$html='] = Element_prototype.html;
 
     Element_prototype.$id = function() {
-      
-      
+
+
       var first = this[0];
 
       if (!first) {
@@ -206,12 +206,12 @@
       }
 
       return first.id || "";
-    
+
     };
 
     Element_prototype['$id='] = function(id) {
-      
-      
+
+
       var first = this[0];
 
       if (first) {
@@ -219,12 +219,12 @@
       }
 
       return this;
-    
+
     };
 
     Element_prototype.$inspect = function() {
-      
-      
+
+
       var val, el, str, result = [];
 
       for (var i = 0, length = this.length; i < length; i++) {
@@ -238,11 +238,11 @@
       }
 
       return '[' + result.join(', ') + ']';
-    
+
     };
 
     Element_prototype.$length = function() {
-      
+
       return this.length;
     };
 
@@ -252,7 +252,7 @@
       if (handler == null) {
         handler = nil
       }
-      
+
       if (handler === nil) {
         handler = selector;
         this.off(event_name, handler._jq);
@@ -260,7 +260,7 @@
       else {
         this.off(event_name, selector, handler._jq);
       }
-    
+
       return handler;
     };
 
@@ -273,7 +273,7 @@
       if (block === nil) {
         return nil
       };
-      
+
       var handler = function(e) { return block.$call(e) };
       block._jq = handler;
 
@@ -283,7 +283,7 @@
       else {
         this.on(event_name, selector, handler);
       }
-    
+
       return block;
     };
 
@@ -306,48 +306,48 @@
     Element_prototype.$trigger = Element_prototype.trigger;
 
     Element_prototype.$value = function() {
-      
+
       return this.val() || "";
     };
 
     Element_prototype['$value='] = Element_prototype.val;
     ;Element._sdonate(["$find", "$id", "$new", "$parse"]);
-  })(self, jQuery)
+  })(self, $)
 })();
 // lib/opal-jquery/event.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice, __klass = __opal.klass;
-  
+
   return (function(__base, __super){
     function Event() {};
     Event = __klass(__base, __super, "Event", Event);
     var Event_prototype = Event.prototype, __scope = Event._scope;
 
     Event_prototype.$current_target = function() {
-      
-      
+
+
       return $(this.currentTarget);
-    
+
     };
 
     Event_prototype.$target = function() {
-      
-      
+
+
       if (this._opalTarget) {
         return this._opalTarget;
       }
-      
+
       return this._opalTarget = $(this.target);
-    
+
     };
 
     Event_prototype.$type = function() {
-      
+
       return this.type;
     };
 
     Event_prototype.$which = function() {
-      
+
       return this.which;
     };
 
@@ -356,7 +356,7 @@
 // lib/opal-jquery/http.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice, __klass = __opal.klass, __hash = __opal.hash;
-  
+
   return (function(__base, __super){
     function HTTP() {};
     HTTP = __klass(__base, __super, "HTTP", HTTP);
@@ -364,27 +364,27 @@
     HTTP_prototype.body = HTTP_prototype.error_message = HTTP_prototype.method = HTTP_prototype.status_code = HTTP_prototype.url = HTTP_prototype.errback = HTTP_prototype.json = HTTP_prototype.ok = HTTP_prototype.settings = HTTP_prototype.callback = nil;
 
     HTTP_prototype.$body = function() {
-      
+
       return this.body
     };
 
     HTTP_prototype.$error_message = function() {
-      
+
       return this.error_message
     };
 
     HTTP_prototype.$method = function() {
-      
+
       return this.method
     };
 
     HTTP_prototype.$status_code = function() {
-      
+
       return this.status_code
     };
 
     HTTP_prototype.$url = function() {
-      
+
       return this.url
     };
 
@@ -418,7 +418,7 @@
       if (handler !== false && handler !== nil) {
         this.callback = this.errback = handler
       };
-      
+
       settings.data = settings.payload;
       settings.url  = url;
       settings.type = method;
@@ -436,14 +436,14 @@
       settings.error = function(xhr, str) {
         return http.$fail();
       };
-    
+
       return this.settings = settings;
     };
 
     HTTP_prototype.$callback = TMP_3 = function() {
       var __context, block;
       block = TMP_3._p || nil, __context = block._s, TMP_3._p = null;
-      
+
       this.callback = block;
       return this;
     };
@@ -451,7 +451,7 @@
     HTTP_prototype.$errback = TMP_4 = function() {
       var __context, block;
       block = TMP_4._p || nil, __context = block._s, TMP_4._p = null;
-      
+
       this.errback = block;
       return this;
     };
@@ -472,12 +472,12 @@
     };
 
     HTTP_prototype['$ok?'] = function() {
-      
+
       return this.ok;
     };
 
     HTTP_prototype['$send!'] = function() {
-      
+
       $.ajax(this.settings);
       return this;
     };
@@ -496,14 +496,14 @@
 // lib/opal-jquery/kernel.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice, __module = __opal.module;
-  
+
   return (function(__base){
     function Kernel() {};
     Kernel = __module(__base, "Kernel", Kernel);
     var Kernel_prototype = Kernel.prototype, __scope = Kernel._scope;
 
     Kernel_prototype.$alert = function(msg) {
-      
+
       alert(msg);
       return nil;
     }
@@ -513,38 +513,38 @@
 // lib/opal-jquery/local_storage.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice, __module = __opal.module;
-  
+
   return (function(__base){
     function LocalStorage() {};
     LocalStorage = __module(__base, "LocalStorage", LocalStorage);
     var LocalStorage_prototype = LocalStorage.prototype, __scope = LocalStorage._scope;
 
     LocalStorage['$[]'] = function(key) {
-      
-      
+
+
       var val = localStorage.getItem(key);
       return val === null ? nil : val;
-    
+
     };
 
     LocalStorage['$[]='] = function(key, value) {
-      
+
       return localStorage.setItem(key, value);
     };
 
     LocalStorage.$clear = function() {
-      
+
       localStorage.clear();
       return this;
     };
 
     LocalStorage.$delete = function(key) {
-      
-      
+
+
       var val = localStorage.getItem(key);
       localStorage.removeItem(key);
       return val === null ? nil : val;
-    
+
     };
         ;LocalStorage._sdonate(["$[]", "$[]=", "$clear", "$delete"]);
   })(self)
@@ -552,7 +552,7 @@
 // lib/opal-jquery.rb
 (function() {
   var __opal = Opal, self = __opal.top, __scope = __opal, nil = __opal.nil, __breaker = __opal.breaker, __slice = __opal.slice;
-  
+
   //= require opal-jquery/document;
   //= require opal-jquery/element;
   //= require opal-jquery/kernel;
