@@ -475,8 +475,66 @@
                       arr.each{ |animal| puts animal }
                     </code>
                   </pre>
-
                   </p>
+                  <p>
+                    Let's see how it works.A method can then invoke an associated block one or more time using the Ruby yield statement. Thus any method that wants to take a block as a parameter can use the <b>yield</b> keyword to execute the block at any time.
+                  </p><br />
+                  <pre>
+                    <code data-language="ruby">
+                      def call_block
+                        puts 'Start of method'
+                        # you can call the block using the yield keyword
+                        yield
+                        yield
+                        puts 'End of method'
+                      end
+                      # Code blocks may appear only in the source adjacent to a method call
+                      call_block {puts 'In the block'}
+                    </code>
+                  </pre>
+                  <p>
+                    <b>Note</b> that the code in the block is not executed at the time it is encountered by the Ruby interpreter. Instead, Ruby remembers the context in which the block appears and then enters the method.
+
+                    A code block's return value (like that of a method) is the value of the last expression evaluated in the code block. This return value is made available inside the method; it comes through as the return value of yield.
+
+                    <i>block_given?</i> returns true if yield would execute a block in the current context. Refer to the following example:
+                  </p><br/>
+                  <pre><code data-language="ruby">
+                    def try
+                      if block_given?
+                        yield
+                      else
+                        puts "no block"
+                      end
+                    end
+                    try # => "no block"
+                    try { puts "hello" } # => "hello"
+                  </code></pre>
+                  <p>You also can pass parameters with the yield statement. Here is an example:</p><br />
+                  <pre>
+                    <code data-language="ruby">
+                      def test
+                         yield 5
+                         puts "You are in the method test"
+                         yield 100
+                      end
+                      test {|i| puts "You are in the block #{i}"}
+                    </code>
+                  </pre>
+                  <h2>Procs</h2>
+                  <p>Proc(Procedure) objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.</p><br />
+                  <pre><code data-language="ruby">
+                    a_proc = Proc.new{ puts 'I am in a proc.'}
+                    a_proc.call
+
+                    # a little advance
+                    putser = Proc.new {|x| puts "x is #{x}" }
+                    def foo(a,b)
+                        a.call(b)
+                    end
+                    foo(putser, 34)
+                    foo(putser, 22)
+                  </code></pre>
                 <h2>More Comming Soon ..</h2>
               </div>
             </div>
