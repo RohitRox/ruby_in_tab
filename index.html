@@ -494,7 +494,7 @@
                   </pre>
                   <p>
                     <b>Note</b> that the code in the block is not executed at the time it is encountered by the Ruby interpreter. Instead, Ruby remembers the context in which the block appears and then enters the method.
-
+                    <br />
                     A code block's return value (like that of a method) is the value of the last expression evaluated in the code block. This return value is made available inside the method; it comes through as the return value of yield.
 
                     <i>block_given?</i> returns true if yield would execute a block in the current context. Refer to the following example:
@@ -522,8 +522,9 @@
                     </code>
                   </pre>
                   <h2>Procs</h2>
-                  <p>Proc(Procedure) objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.</p><br />
+                  <p>Proc(Procedure) objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.Like variables hold data, procs hold the code itself.Procs are first class objects of ruby with class Proc.</p><br />
                   <pre><code data-language="ruby">
+                    # simple proc
                     a_proc = Proc.new{ puts 'I am in a proc.'}
                     a_proc.call
 
@@ -534,6 +535,64 @@
                     end
                     foo(putser, 34)
                     foo(putser, 22)
+                  </code></pre>
+                  <p>Difference between blocks and procs is blocks like procs are used to pass code to methods, but they are like undefined procs. ie they are not assigned to any variable, they are just passed to the methods. </p>
+                  <h2>The ampersand (&amp;)</h2>
+                  <p>The ampersand operator can be used to explicitly convert between blocks and Procs in a couple of esoteric cases. It is worthy to understand how these work.If a method want to accept a block but wants to use it as a proc, then add an &amp; in front of the last parameter(the parameter which will receive the block.</p><br />
+                  <pre><code data-language="ruby">
+                    def run_my_code(&amp;my_code)
+                     my_code.call
+                    end
+                    run_my_code { puts "passing a block, accepting a proc"}
+                  </code></pre>
+                  <p>If you have a proc and you want to pass it to a method which accepts block, then when passing use a ampersand before the proc parameter.</p><br />
+                  <pre><code data-language="ruby">
+                     def run_my_code
+                     yield
+                    end
+                    my_proc = Proc.new  { puts "passing a proc instead of block"}
+                    #=> run_my_code(my_proc) #error, wrong number of arguments
+                    run_my_code(&amp;my_proc) # passing a proc instead of block
+                  </code></pre>
+                  <p>
+                    <strong>Important points</strong>
+                    <ul>
+                      <li>Only one block can be accepted by a method.</li>
+                      <li>A block can be passed to any method, no need to define it.</li>
+                      <li>To pass a proc instead of a block append an “&amp;” in front of the Proc.</li>
+                    </ul>
+                  </p>
+                  <h2>Lambdas</h2>
+                  <p>Lambda function are almost identical to Procs but with two key differences. First, a lambda checks the the number of arguments it receives and returns an ArgumentError if they do not match. For example:</p><br />
+                  <pre><code data-language="ruby">
+                    # simple lambda
+                    l = lambda { puts "I'm a lambda" }
+                    l.call
+
+                    # lambda with params
+                    l = lambda { |first,last| puts "Fullname: #{first} #{last}"}
+                    l.call('Rohit', 'Rox')
+
+                    # procs and lambda
+                    l = lambda { |first,last| puts "Fullname: #{first} #{last}"}
+                    #=> l.call('Rohit') will give error
+                    p = Proc.new { |first,last| puts "Fullname: #{first} #{last}"}
+                    p.call('Rohit')
+                  </code></pre>
+                  <p>Second, lambdas provide diminutive returns – meaning that when a Proc encounters a return statement in it’s execution, it halts the method and returns the provided value. Lambdas on the other hand, return their value to the method, allowing it to continue:</p><br />
+                  <pre><code data-language="ruby">
+                    def proc_math
+                      Proc.new { return 1 + 1 }.call
+                      return 2 + 2
+                    end
+                     
+                    def lambda_math
+                      lambda { return 1 + 1 }.call
+                      return 2 + 2
+                    end
+                     
+                    puts proc_math # => 2  
+                    puts lambda_math # => 4  
                   </code></pre>
                 <h2>More Comming Soon ..</h2>
               </div>
