@@ -585,15 +585,62 @@
                       Proc.new { return 1 + 1 }.call
                       return 2 + 2
                     end
-                     
+
                     def lambda_math
                       lambda { return 1 + 1 }.call
                       return 2 + 2
                     end
-                     
-                    puts proc_math # => 2  
-                    puts lambda_math # => 4  
+
+                    puts proc_math # => 2
+                    puts lambda_math # => 4
                   </code></pre>
+                  <h2>The &amp;</h2>
+                  <p>The unary &amp; operator gives us convienient way of switching between block and blocks. Letus dive into more deep understaning of &amp;</p>
+                  <ul>
+                    <li>if object is a block, it converts the block into a simple proc.</li>
+                    <li>if object is a Proc, it converts the object into a block while preserving the lambda? status of the object.</li>
+                    <li>if object is not a Proc, it first calls #to_proc on the object and then converts it into a block.</li>
+                  </ul>
+                  <p>The simplest example of this is when we want to have access to the block we pass to a method, instead of just calling yield, as shown in examples earlier.</p>
+                  <p>Second is If object is a Proc, it converts the object into a block while preserving the <i>lambda?</i> status of the object. This is an extremely useful case of the &amp; operator. </p><br />
+                  <pre><code data-language="ruby">
+                    multiply = lambda{ |x| x*2 }
+                    puts [1,2,3].map(&amp;multiply)
+                    #=> [2, 4, 6]
+                  </code></pre>
+                  <p>we know that Array#map takes a block, but say we have a proc that we want to re-use in multiple map calls.</p>
+                  <p>Keep in mind that the operator also preserves the lambda? status of the original block. That's kind of neat because it means we are able to pass lambdas (not simple procs) as blocks. That means we can impose strict argument checking in our blocks and we can have them return values using the return keyword. </p>
+                  <pre><code data-language="ruby">
+                      def describe(&amp;block)
+                       puts  "Calling lambda? on the block results in #{block.lambda?}."
+                      end
+                      l = lambda{ }
+                      describe(&amp;l)
+                      #= Calling lambda? on the block results in true.
+                      p = Proc.new{}
+                      describe(&amp;p)
+                      #= Calling lambda? on the block results in false;
+                  </code></pre>
+                  <p>The last case is really interesting and feels like magic.</p><br />
+                  <pre><code data-language="ruby">
+                    puts ["apple", "ball", "cat"].map(&amp;:upcase)
+                  </code></pre>
+                  <p>So what's happening here.<br />If object is not a Proc, it first calls #to_proc on the object and then converts it into a block. This is where the magic really happens because it makes passing objects to functions in the place of blocks very simple. The most common case of this is probably calling into Array#map with a symbol as shown above.<br />This works because calling <i>Symbol#to_proc</i> returns a proc that responds to the symbol's method. So the <i>:upcase</i> symbol is first converted to a proc, and then to a block. The <i>.map</i> on array iterates through each element in the array, returns the result of calling upcase on that element.This is kind of cool because we can create our own to_proc methods.</p>
+                  <p>In short, by prepending &amp; to a symbol we are creating a lambda function that will call method with a name of that symbol on the object you pass into this function. <br />
+                  Let's use this pattern in our example:</p><br />
+                  <pre><code data-language="ruby">
+                    class FancyDisplay
+                      def self.to_proc
+                        lambda{ |x| puts("** #{x} ** ") }
+                      end
+                    end
+                    greetings = ["Hi", "Hello", "Welcome"]
+                    greetings.map(&amp;FancyDisplay)
+                    #= ** Hi **
+                    #= ** Hello **
+                    #= ** Welcome **
+                  </code></pre>
+
                 <h2>More Comming Soon ..</h2>
               </div>
             </div>
