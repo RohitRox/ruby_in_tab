@@ -86,9 +86,9 @@
           <div class="stp-content-frame">
             <div class="stp-content-body">
               <div class="container">
-                History of snippets ..
+                <h2>History of snippets ..</h2>
                 <br/>
-                Comming Soon ..
+                
               </div>
             </div>
           </div>
@@ -687,6 +687,11 @@
       });
 
       $('#link_to_history').click(function(){
+        var pre_str = $("<pre><code data-language='ruby'></code></pre>")
+        for (var i = 0; i < localStorage.length; i++){
+          var date = (new Date(parseInt(localStorage.key(i)))).toLocaleString();
+          history.find('.container').append("<div class='history_code_block'><div class='left history_created'>Created At: <b>"+date+"</b></div><div class='right'><a href='javascript: void(0);' class='run_from_history' data-key='"+localStorage.key(i)+"'>Run this</a><a href='javascript: void(0);' class='del_from_history' data-key='"+localStorage.key(i)+"'>Remove from History</a></div><pre><code data-language='ruby'>"+JSON.parse(localStorage.getItem(localStorage.key(i)))+"</code></pre></div>");
+        }
         return st.show_section(history, {
           animation: 'rightfromleft'
         });
@@ -709,11 +714,11 @@
           try{
             var code=Opal.Opal.Parser.$new().$parse(code);
             eval(code);
-            window.scrollTo("60%")
           }
           catch(err)
           {
-            Opal.puts(""+err+"\n"+err.stack)
+            //Opal.puts(""+err+"\n"+err.stack);
+            Opal.puts("Oops. There is error in the code.")
           }
         }
       }
@@ -727,14 +732,27 @@
         else
         {
           RIT.compile(code);
+          window.localStorage.setItem(new Date().getTime(),JSON.stringify(code));
         }
       });
       $('#action_clear').click(function(){
         $('#editor').val('');
       });
+      $('.del_from_history').live('click', function(){
+        var key = $(this).data('key');
+        localStorage.removeItem(key);
+        $(this).parent('div').parent('.history_code_block').remove();
+      });
+      $('.run_from_history').live('click', function(){
+        var code = $(this).parent().siblings('pre').text();        
+        st.show_section(home, {
+          animation: 'downfromtop'
+        });
+        $('#editor').val(code);
+      });
       $(function(){
         var height = $(window).height();
-        $('#editor').css('height',(70*height)/100);
+        $('#editor').css('height',(65*height)/100);
 
         $('pre code').after('<div class="code_run_block"><a href="#" class="fav_this">Fav this</a><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
         $('.run_or_edit_this').live('click', function(){
