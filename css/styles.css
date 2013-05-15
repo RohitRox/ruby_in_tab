@@ -55,7 +55,7 @@ pre{
   margin: 10px 0;
 }
 .ruby_home p{
-  line-height: 1.2em;
+  line-height: 1.4em;
   font-weight: 200;
 }
 .about_rubyintab{
@@ -121,4 +121,10 @@ table tr, table td{
 .button_class:active {
     position:relative;
     top:1px;
+}
+.ruby_home ul{
+  padding: 1em;
+  list-style: square;
+  margin-left: 1em;
+  line-height: 1.4em
 }
