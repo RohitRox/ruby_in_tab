@@ -680,13 +680,13 @@
         });
       });
 
-      $('#link_to_ruby_home').bind("click touchstart",(function(){
+      $('#link_to_ruby_home').bind("click touchstart",function(){
         return st.show_section(ruby_home, {
           animation: 'rightfromleft'
         });
       });
 
-      $('#link_to_history').bind("click touchstart",(function(){
+      $('#link_to_history').bind("click touchstart",function(){
         var pre_str = $("<pre><code data-language='ruby'></code></pre>")
         for (var i = 0; i < localStorage.length; i++){
           var date = (new Date(parseInt(localStorage.key(i)))).toLocaleString();
@@ -697,7 +697,7 @@
         });
       });
 
-      $('#link_to_fav').bind("click touchstart",(function(){
+      $('#link_to_fav').bind("click touchstart",function(){
         return st.show_section(fav, {
           animation: 'rightfromleft'
         });
@@ -723,7 +723,7 @@
         }
       }
 
-      $('.run_me').bind("click touchstart",(function(){
+      $('.run_me').bind("click touchstart",function(){
         var code = $('#editor').val();
         if (code === ""){
           alert('Blank code.');
@@ -735,7 +735,7 @@
           window.localStorage.setItem(new Date().getTime(),JSON.stringify(code));
         }
       });
-      $('#action_clear').bind("click touchstart",(function(){
+      $('#action_clear').bind("click touchstart",function(){
         $('#editor').val('');
       });
       $('.del_from_history').live('click', function(){
