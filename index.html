@@ -88,7 +88,7 @@
               <div class="container">
                 <h2>History of snippets ..</h2>
                 <br/>
-                
+
               </div>
             </div>
           </div>
@@ -668,25 +668,25 @@
       var fav = $('#fav')
 
       $(".header-button.menu").on("click",st.toggle_nav);
-      $('#action_about, #link_to_about').click(function() {
+      $('#action_about, #link_to_about').bind("click touchstart",function() {
         return st.show_section(about, {
           animation: 'upfrombottom'
         });
       });
 
-      $('a.cancel').click(function() {
+      $('a.cancel').bind("click touchstart",function() {
         return st.show_section(home, {
           animation: 'downfromtop'
         });
       });
 
-      $('#link_to_ruby_home').click(function(){
+      $('#link_to_ruby_home').bind("click touchstart",(function(){
         return st.show_section(ruby_home, {
           animation: 'rightfromleft'
         });
       });
 
-      $('#link_to_history').click(function(){
+      $('#link_to_history').bind("click touchstart",(function(){
         var pre_str = $("<pre><code data-language='ruby'></code></pre>")
         for (var i = 0; i < localStorage.length; i++){
           var date = (new Date(parseInt(localStorage.key(i)))).toLocaleString();
@@ -697,7 +697,7 @@
         });
       });
 
-      $('#link_to_fav').click(function(){
+      $('#link_to_fav').bind("click touchstart",(function(){
         return st.show_section(fav, {
           animation: 'rightfromleft'
         });
@@ -723,7 +723,7 @@
         }
       }
 
-      $('.run_me').click(function(){
+      $('.run_me').bind("click touchstart",(function(){
         var code = $('#editor').val();
         if (code === ""){
           alert('Blank code.');
@@ -735,7 +735,7 @@
           window.localStorage.setItem(new Date().getTime(),JSON.stringify(code));
         }
       });
-      $('#action_clear').click(function(){
+      $('#action_clear').bind("click touchstart",(function(){
         $('#editor').val('');
       });
       $('.del_from_history').live('click', function(){
@@ -744,7 +744,7 @@
         $(this).parent('div').parent('.history_code_block').remove();
       });
       $('.run_from_history').live('click', function(){
-        var code = $(this).parent().siblings('pre').text();        
+        var code = $(this).parent().siblings('pre').text();
         st.show_section(home, {
           animation: 'downfromtop'
         });
