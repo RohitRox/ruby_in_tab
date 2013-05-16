@@ -688,9 +688,9 @@
 
       $('#link_to_history').bind("click touchstart",function(){
         var pre_str = $("<pre><code data-language='ruby'></code></pre>")
-        for (var i = 0; i < localStorage.length; i++){
-          var date = (new Date(parseInt(localStorage.key(i)))).toLocaleString();
-          history.find('.container').append("<div class='history_code_block'><div class='left history_created'>Created At: <b>"+date+"</b></div><div class='right'><a href='javascript: void(0);' class='run_from_history' data-key='"+localStorage.key(i)+"'>Run this</a><a href='javascript: void(0);' class='del_from_history' data-key='"+localStorage.key(i)+"'>Remove from History</a></div><pre><code data-language='ruby'>"+JSON.parse(localStorage.getItem(localStorage.key(i)))+"</code></pre></div>");
+        for (var i = 0; i < window.localStorage.length; i++){
+          var date = (new Date(parseInt(window.localStorage.key(i)))).toLocaleString();
+          history.find('.container').append("<div class='history_code_block'><div class='left history_created'>Created At: <b>"+date+"</b></div><div class='right'><a href='javascript: void(0);' class='run_from_history' data-key='"+window.localStorage.key(i)+"'>Run this</a><a href='javascript: void(0);' class='del_from_history' data-key='"+window.localStorage.key(i)+"'>Remove from History</a></div><pre><code data-language='ruby'>"+JSON.parse(window.localStorage.getItem(window.localStorage.key(i)))+"</code></pre></div>");
         }
         return st.show_section(history, {
           animation: 'rightfromleft'
@@ -740,7 +740,7 @@
       });
       $('.del_from_history').live('click', function(){
         var key = $(this).data('key');
-        localStorage.removeItem(key);
+        window.localStorage.removeItem(key);
         $(this).parent('div').parent('.history_code_block').remove();
       });
       $('.run_from_history').live('click', function(){
