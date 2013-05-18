@@ -659,8 +659,10 @@
     <script type="text/javascript" src="js/lib/rainbow.js"></script>
     <script type="text/javascript" src="js/lib/rainbow.ruby.js"></script>
     <script type="text/javascript">
-
-      document.addEventListener("deviceready", onDeviceReady, false);
+      $(document).ready(function() {
+          document.addEventListener("deviceready", onDeviceReady, false);
+          //onDeviceReady();
+      });
 
       function onDeviceReady() {
 
@@ -759,7 +761,7 @@
           $('#editor').val(code);
         });
         var height = $(window).height();
-        $('#editor').css('height',(65*height)/100);
+        $('#editor').css('height',(60*height)/100);
 
         // $('pre code').after('<div class="code_run_block"><a href="#" class="fav_this">Fav this</a><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
         $('pre code').after('<div class="code_run_block"><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
