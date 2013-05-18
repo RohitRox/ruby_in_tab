@@ -658,112 +658,119 @@
     <script type="text/javascript" src="js/lib/opal_jquery.js"></script>
     <script type="text/javascript" src="js/lib/rainbow.js"></script>
     <script type="text/javascript" src="js/lib/rainbow.ruby.js"></script>
-    <script>
-      var st = sidetap();
+    <script type="text/javascript">
 
-      var about = $('#about');
-      var home = $('#home');
-      var ruby_home = $('#ruby_home');
-      var history = $('#history');
-      var fav = $('#fav')
+      document.addEventListener("deviceready", onDeviceReady, false);
 
-      $(".header-button.menu").on("click",st.toggle_nav);
-      $('#action_about, #link_to_about').bind("click touchstart",function() {
-        return st.show_section(about, {
-          animation: 'upfrombottom'
+      function onDeviceReady() {
+
+        var st = sidetap();
+        var about = $('#about');
+        var home = $('#home');
+        var ruby_home = $('#ruby_home');
+        var history = $('#history');
+        var fav = $('#fav');
+
+        $(".header-button.menu").bind("touchstart",st.toggle_nav);
+      
+        $('#action_about, #link_to_about').bind("touchstart",function() {
+          return st.show_section(about, {
+            animation: 'upfrombottom'
+          });
         });
-      });
 
-      $('a.cancel').bind("click touchstart",function() {
-        return st.show_section(home, {
-          animation: 'downfromtop'
+        $('a.cancel').bind("touchstart",function() {
+          return st.show_section(home, {
+            animation: 'downfromtop'
+          });
         });
-      });
 
-      $('#link_to_ruby_home').bind("click touchstart",function(){
-        return st.show_section(ruby_home, {
-          animation: 'rightfromleft'
+        $('#link_to_ruby_home').bind("touchstart",function(){
+          return st.show_section(ruby_home, {
+            animation: 'rightfromleft'
+          });
         });
-      });
 
-      $('#link_to_history').bind("click touchstart",function(){
-        var pre_str = $("<pre><code data-language='ruby'></code></pre>")
-        for (var i = 0; i < window.localStorage.length; i++){
-          var date = (new Date(parseInt(window.localStorage.key(i)))).toLocaleString();
-          history.find('.container').append("<div class='history_code_block'><div class='left history_created'>Created At: <b>"+date+"</b></div><div class='right'><a href='javascript: void(0);' class='run_from_history' data-key='"+window.localStorage.key(i)+"'>Run this</a><a href='javascript: void(0);' class='del_from_history' data-key='"+window.localStorage.key(i)+"'>Remove from History</a></div><pre><code data-language='ruby'>"+JSON.parse(window.localStorage.getItem(window.localStorage.key(i)))+"</code></pre></div>");
-        }
-        return st.show_section(history, {
-          animation: 'rightfromleft'
+        $('#link_to_history').bind("touchstart",function(){
+          var pre_str = $("<pre><code data-language='ruby'></code></pre>")
+          for (var i = 0; i < window.localStorage.length; i++){
+            var date = (new Date(parseInt(window.localStorage.key(i)))).toLocaleString();
+            history.find('.container').append("<div class='history_code_block'><div class='left history_created'>Created At: <b>"+date+"</b></div><div class='right'><a href='javascript: void(0);' class='run_from_history' data-key='"+window.localStorage.key(i)+"'>Run this</a><a href='javascript: void(0);' class='del_from_history' data-key='"+window.localStorage.key(i)+"'>Remove from History</a></div><pre><code data-language='ruby'>"+JSON.parse(window.localStorage.getItem(window.localStorage.key(i)))+"</code></pre></div>");
+          }
+          return st.show_section(history, {
+            animation: 'rightfromleft'
+          });
         });
-      });
 
-      $('#link_to_fav').bind("click touchstart",function(){
-        return st.show_section(fav, {
-          animation: 'rightfromleft'
+        $('#link_to_fav').bind("touchstart",function(){
+          return st.show_section(fav, {
+            animation: 'rightfromleft'
+          });
         });
-      });
 
-      var RIT = {
-        compile: function(code){
-          var old_puts = Opal.puts,
-          flush = [];
-          Opal.puts = function (e) {
-                flush.push(e), $('#output').html(flush.join("\n"));
+        var RIT = {
+          compile: function(code){
+            var old_puts = Opal.puts,
+            flush = [];
+            Opal.puts = function (e) {
+                  flush.push(e), $('#output').html(flush.join("\n"));
+              }
+            $('#output').html('');
+            try{
+              var code=Opal.Opal.Parser.$new().$parse(code);
+              eval(code);
             }
-          $('#output').html('');
-          try{
-            var code=Opal.Opal.Parser.$new().$parse(code);
-            eval(code);
+            catch(err)
+            {
+              //Opal.puts(""+err+"\n"+err.stack);
+              Opal.puts("Oops. There is error in the code.")
+            }
           }
-          catch(err)
+        }
+
+        $('.run_me').bind("touchstart",function(){
+          var code = $('#editor').val();
+          if (code === ""){
+            alert('Blank code.');
+            return;
+          }
+          else
           {
-            //Opal.puts(""+err+"\n"+err.stack);
-            Opal.puts("Oops. There is error in the code.")
+            RIT.compile(code);
+            window.localStorage.setItem(new Date().getTime(),JSON.stringify(code));
           }
-        }
-      }
-
-      $('.run_me').bind("click touchstart",function(){
-        var code = $('#editor').val();
-        if (code === ""){
-          alert('Blank code.');
-          return;
-        }
-        else
-        {
-          RIT.compile(code);
-          window.localStorage.setItem(new Date().getTime(),JSON.stringify(code));
-        }
-      });
-      $('#action_clear').bind("click touchstart",function(){
-        $('#editor').val('');
-      });
-      $('.del_from_history').live('click', function(){
-        var key = $(this).data('key');
-        window.localStorage.removeItem(key);
-        $(this).parent('div').parent('.history_code_block').remove();
-      });
-      $('.run_from_history').live('click', function(){
-        var code = $(this).parent().siblings('pre').text();
-        st.show_section(home, {
-          animation: 'downfromtop'
         });
-        $('#editor').val(code);
-      });
-      $(function(){
-        var height = $(window).height();
-        $('#editor').css('height',(65*height)/100);
 
-        // $('pre code').after('<div class="code_run_block"><a href="#" class="fav_this">Fav this</a><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
-        $('pre code').after('<div class="code_run_block"><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
-        $('.run_or_edit_this').live('click', function(){
-          var code = $(this).parent('div').siblings('code').text();
+        $('#action_clear').bind("touchstart",function(){
+          $('#editor').val('');
+        });
+
+        $('.del_from_history').live('touchstart', function(){
+          var key = $(this).data('key');
+          window.localStorage.removeItem(key);
+          $(this).parent('div').parent('.history_code_block').remove();
+        });
+
+        $('.run_from_history').live('touchstart', function(){
+          var code = $(this).parent().siblings('pre').text();
           st.show_section(home, {
             animation: 'downfromtop'
           });
           $('#editor').val(code);
         });
-      });
+        var height = $(window).height();
+        $('#editor').css('height',(65*height)/100);
+
+        // $('pre code').after('<div class="code_run_block"><a href="#" class="fav_this">Fav this</a><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
+        $('pre code').after('<div class="code_run_block"><a href="#" class="run_or_edit_this">Edit or Run</a></div>');
+        $('.run_or_edit_this').live('touchstart', function(){
+          var code = $(this).parent('div').siblings('code').text();
+          st.show_section(home, {
+            animation: 'downfromtop'
+          });
+          $('#editor').val(code);
+        });   
+      }
     </script>
   </body>
 </html>
