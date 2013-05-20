@@ -137,3 +137,7 @@ table tr, table td{
   font-size: .8em;
   margin-bottom: 4px;
 }
+#about ul{
+	padding-left: 10px;
+	list-style: disc;
+	margin-left: 20px;
