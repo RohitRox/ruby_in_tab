@@ -14,3 +14,7 @@ Credits
 =======
   - Made possible By [Opal](https://github.com/opal/opal)
   - Phonegap App
+
+Todo
+=====
+  - Interactive Ruby Guide
